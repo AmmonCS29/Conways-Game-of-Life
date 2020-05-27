@@ -38,7 +38,7 @@ export default function Buttons(props){
                     variant='danger'
                     
                 >
-                    <Dropdown.Item eventKey="1">20x10</Dropdown.Item>
+                    <Dropdown.Item eventKey="1">25x25</Dropdown.Item>
                     <Dropdown.Item eventKey="2">50x30</Dropdown.Item>
                     <Dropdown.Item eventKey="3">70x50</Dropdown.Item>
                 </DropdownButton>
