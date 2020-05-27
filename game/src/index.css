@@ -1,6 +1,8 @@
 
 body {
-  background-image: url(http://subtlepatterns2015.subtlepatterns.netdna-cdn.com/patterns/squares.png) 
+  /* background-image: url(http://subtlepatterns2015.subtlepatterns.netdna-cdn.com/patterns/squares.png)  */
+  background-image: url('./moto-unsplash.jpg');
+  background-size: cover;
 }
   
 .box {
@@ -13,11 +15,12 @@ body {
   }
 
 .off {
-  background-color: lightgray;
+  /* background-color: lightgray; */
+  background-color:transparent;
 }
 
 .on {
-  background-color: green;
+  background-color: #ff0000;
 }
   
 .box:hover { 
@@ -48,4 +51,8 @@ h1, h2, h3, h4 {
 
 h4 {
   margin-top: 0px;
+}
+
+.btn{
+  margin: 0 5px;
 }

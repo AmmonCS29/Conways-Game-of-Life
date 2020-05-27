@@ -2,12 +2,9 @@ import React from 'react';
 import Box from './Box.js';
 
 export default function GridTwo(props){
-    const Width = (props.cols * 16);
+    const Width = (props.cols * 14);
     let rowsArr = [];
     var boxClass = "";
-    console.log(props.rows)
-    console.log('cols', props.cols)
-    console.log("gridfull", props.gridFull)
     for (let i = 0; i < props.rows; i++){
         for (let j = 0; j < props.cols; j++){
             let boxId = i + "_" + j;

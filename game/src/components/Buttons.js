@@ -13,28 +13,30 @@ export default function Buttons(props){
     return (
         <div className="center">
             <ButtonToolbar>
-                <button className="btn btn-default" onClick={props.playButton}>
+                <button className="btn btn-danger" onClick={props.playButton}>
                     Play
                 </button>
-                <button className="btn btn-default" onClick={props.pauseButton}>
+                <button className="btn btn-danger" onClick={props.pauseButton}>
                     Pause
                 </button>
-                <button className="btn btn-default" onClick={props.clear}>
+                <button className="btn btn-danger" onClick={props.clear}>
                     Clear
                 </button>
-                <button className="btn btn-default" onClick={props.slow}>
+                <button className="btn btn-danger" onClick={props.slow}>
                     Slow
                 </button>
-                <button className="btn btn-default" onClick={props.fast}>
+                <button className="btn btn-danger" onClick={props.fast}>
                     Fast
                 </button>
-                <button className="btn btn-default" onClick={props.seed}>
+                <button className="btn btn-danger" onClick={props.seed}>
                     Seed
                 </button>
                 <DropdownButton
                     title="Grid Size"
                     id="size-menu"
                     onSelect={handleSelect}
+                    variant='danger'
+                    
                 >
                     <Dropdown.Item eventKey="1">20x10</Dropdown.Item>
                     <Dropdown.Item eventKey="2">50x30</Dropdown.Item>
