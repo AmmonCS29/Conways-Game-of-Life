@@ -27,10 +27,13 @@ class Main extends React.Component {
 	}
 
 	seed = () => {
+		//clones the initial grid.
 		let gridCopy = arrayClone(this.state.gridFull);
 		for (let i = 0; i < this.rows; i++) {
+			//loops through the rows and columns
 			for (let j = 0; j < this.cols; j++) {
-				if (Math.floor(Math.random() * 4) === 1) {
+				//Gives each square in the grid a 25% chance of being turned on
+				if (Math.floor(Math.random() * 4) === 1) { 
 					gridCopy[i][j] = true;
 				}
 			}
@@ -41,8 +44,8 @@ class Main extends React.Component {
 	}
 
 	playButton = () => {
-		clearInterval(this.intervalId);
-		this.intervalId = setInterval(this.play, this.speed);
+		clearInterval(this.intervalId); //clears the interval as it is running
+		this.intervalId = setInterval(this.play, this.speed);//creates the interval at which it automatically plays at the speed set above. 
 	}
 
 	pauseButton = () => {
@@ -50,7 +53,9 @@ class Main extends React.Component {
 	}
 
 	slow = () => {
+		// changes the speed
 		this.speed = 1000;
+		// initializes the playbutton with the new speed set on line 57
 		this.playButton();
 	}
 
@@ -60,7 +65,9 @@ class Main extends React.Component {
 	}
 
 	clear = () => {
+		//Creates a new empty grid
 		var grid = Array(this.rows).fill().map(() => Array(this.cols).fill(false));
+		//sets the state to the new empty grid and generation back to 0
 		this.setState({
 			gridFull: grid,
 			generation: 0
@@ -68,6 +75,7 @@ class Main extends React.Component {
 	}
 
 	gridSize = (size) => {
+		//switch case statement that sets the size of the columns and rows. And then the clear is called to set the grid to be empty and generations back to zero. 
 		switch (size) {
 			case "1":
 				this.cols = 25;
@@ -81,17 +89,20 @@ class Main extends React.Component {
 				this.cols = 70;
 				this.rows = 50;
 		}
+		//updates the cols and rows in the grid inside the clear function to be the size set above based of the selection.
 		this.clear();
 
 	}
 
 	play = () => {
-		let g = this.state.gridFull;
-		let g2 = arrayClone(this.state.gridFull);
+		let g = this.state.gridFull; // using the current state of the grid
+		let g2 = arrayClone(this.state.gridFull); // creating a second copy of the grid. 
 
+		// Going to iterate over every element in the grid
 		for (let i = 0; i < this.rows; i++) {
 		  for (let j = 0; j < this.cols; j++) {
-		    let count = 0;
+			let count = 0; //How many neighbors each cell has.
+			//This is how you check each neighbor. 
 		    if (i > 0) if (g[i - 1][j]) count++;
 		    if (i > 0 && j > 0) if (g[i - 1][j - 1]) count++;
 		    if (i > 0 && j < this.cols - 1) if (g[i - 1][j + 1]) count++;
@@ -99,7 +110,8 @@ class Main extends React.Component {
 		    if (j > 0) if (g[i][j - 1]) count++;
 		    if (i < this.rows - 1) if (g[i + 1][j]) count++;
 		    if (i < this.rows - 1 && j > 0) if (g[i + 1][j - 1]) count++;
-		    if (i < this.rows - 1 && j < this.cols - 1) if (g[i + 1][j + 1]) count++;
+			if (i < this.rows - 1 && j < this.cols - 1) if (g[i + 1][j + 1]) count++;
+			// Then you decide if its going to die or live
 		    if (g[i][j] && (count < 2 || count > 3)) g2[i][j] = false;
 		    if (!g[i][j] && count === 3) g2[i][j] = true;
 		  }
@@ -113,7 +125,7 @@ class Main extends React.Component {
 
 	componentDidMount() {
 		this.seed();
-		this.playButton();
+		// this.playButton();
 	}
 
 	render() {
@@ -131,13 +143,14 @@ class Main extends React.Component {
 						gridSize={this.gridSize}
 						play={this.play}
 					/>
+					<h2>Generations: {this.state.generation}</h2>
 					<Grid
 						gridFull={this.state.gridFull}
 						rows={this.rows}
 						cols={this.cols}
 						selectBox={this.selectBox}
 					/>
-					<h2>Generations: {this.state.generation}</h2>
+					
 				</div>
 				<div >
 					<Rules />

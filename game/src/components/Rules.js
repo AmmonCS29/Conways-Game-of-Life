@@ -7,10 +7,11 @@ function Rules(){
         <div className="right">
         <h2>The Rules</h2>
             <ol>
-                <li>If a cell is alive and has 2 or 3 neighbors that are alive. Then it remains alive.</li>
-                <li>If the cell is dead and has EXACTLY 3 alive neighbors then it comes to life. Else it remains dead.</li>
-                <li>For each cell it checks the cell's eight neighbors. They are: up, down, left, right and the diagonals</li>
-                <li>Neighbor cells end at each edge of the grid</li>
+                <li>Any live cell with fewer than two live neighbours dies, as if by underpopulation.</li>
+                <li>Any live cell with two or three live neighbours lives on to the next generation.</li>
+                <li>Any live cell with more than three live neighbours dies, as if by overpopulation.</li>
+                <li>Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.</li>
+                <li>Assume cells beyond the boundary are always dead.</li>
             </ol>
         </div>
     )

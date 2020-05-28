@@ -1,7 +1,7 @@
 
 body {
   /* background-image: url(http://subtlepatterns2015.subtlepatterns.netdna-cdn.com/patterns/squares.png)  */
-  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('./moto-unsplash.jpg');
+  background: linear-gradient(rgba(221, 35, 35, 0.1), rgba(221, 24, 24, 0.1)), url('./moto-unsplash.jpg');
   background-size: cover;
 }
   
