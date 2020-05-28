@@ -14,13 +14,17 @@ class Main extends React.Component {
 
 		this.state = {
 			generation: 0,
+			//This creates the grid which is a multidimentional array.
 			gridFull: Array(this.rows).fill().map(() => Array(this.cols).fill(false))
 		}
 	}
 
 	selectBox = (row, col) => {
+		//Clone the original grid
 		let gridCopy = arrayClone(this.state.gridFull);
+		//based on the click it will turn the box on the grid from true to false or vice versa
 		gridCopy[row][col] = !gridCopy[row][col];
+		//setting the state to the current copy
 		this.setState({
 			gridFull: gridCopy
 		});
@@ -32,7 +36,7 @@ class Main extends React.Component {
 		for (let i = 0; i < this.rows; i++) {
 			//loops through the rows and columns
 			for (let j = 0; j < this.cols; j++) {
-				//Gives each square in the grid a 25% chance of being turned on
+				//Gives each square in the grid a 25% chance of being turned true or on
 				if (Math.floor(Math.random() * 4) === 1) { 
 					gridCopy[i][j] = true;
 				}
@@ -43,8 +47,11 @@ class Main extends React.Component {
 		});
 	}
 
+	
+
 	playButton = () => {
-		clearInterval(this.intervalId); //clears the interval as it is running
+		//clearInterval and setInterval are built in window javascript functions.
+		clearInterval(this.intervalId); //clears the interval as it is running. 
 		this.intervalId = setInterval(this.play, this.speed);//creates the interval at which it automatically plays at the speed set above. 
 	}
 
@@ -72,6 +79,7 @@ class Main extends React.Component {
 			gridFull: grid,
 			generation: 0
 		});
+		this.pauseButton();
 	}
 
 	gridSize = (size) => {
@@ -95,6 +103,7 @@ class Main extends React.Component {
 	}
 
 	play = () => {
+		//This is where the double buffering takes place. 
 		let g = this.state.gridFull; // using the current state of the grid
 		let g2 = arrayClone(this.state.gridFull); // creating a second copy of the grid. 
 
@@ -103,6 +112,7 @@ class Main extends React.Component {
 		  for (let j = 0; j < this.cols; j++) {
 			let count = 0; //How many neighbors each cell has.
 			//This is how you check each neighbor. 
+			//If there is a neighbor then it adds to the count. 
 		    if (i > 0) if (g[i - 1][j]) count++;
 		    if (i > 0 && j > 0) if (g[i - 1][j - 1]) count++;
 		    if (i > 0 && j < this.cols - 1) if (g[i - 1][j + 1]) count++;
@@ -110,10 +120,12 @@ class Main extends React.Component {
 		    if (j > 0) if (g[i][j - 1]) count++;
 		    if (i < this.rows - 1) if (g[i + 1][j]) count++;
 		    if (i < this.rows - 1 && j > 0) if (g[i + 1][j - 1]) count++;
-			if (i < this.rows - 1 && j < this.cols - 1) if (g[i + 1][j + 1]) count++;
+			if (i < this.rows - 1 && j < this.cols - 1) 
+				if (g[i + 1][j + 1]) 
+					count++;
 			// Then you decide if its going to die or live
-		    if (g[i][j] && (count < 2 || count > 3)) g2[i][j] = false;
-		    if (!g[i][j] && count === 3) g2[i][j] = true;
+		    if (g[i][j] && (count < 2 || count > 3)) g2[i][j] = false; //Stays dead or dies
+		    if (!g[i][j] && count === 3) g2[i][j] = true; //comes to life or stays alive
 		  }
 		}
 		this.setState({
@@ -122,11 +134,128 @@ class Main extends React.Component {
 		});
 
 	}
-
-	componentDidMount() {
-		this.seed();
-		// this.playButton();
+	glider= () => {
+		let gridCopy = arrayClone(this.state.gridFull);
+		for(let i = 0; i < this.rows; i++){
+			for (let j=0; j < this.cols; j++){
+				if(gridCopy[i][j] === gridCopy[4][1]){
+					gridCopy[4][1] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[5][1]){
+					gridCopy[5][1] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[4][2]){
+					gridCopy[4][2] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[5][2]){
+					gridCopy[5][2] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[4][11]){
+					gridCopy[4][11] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[5][11]){
+					gridCopy[5][11] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[6][11]){
+					gridCopy[6][11] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[3][12]){
+					gridCopy[3][12] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[7][12]){
+					gridCopy[7][12] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[8][13]){
+					gridCopy[8][13] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[8][14]){
+					gridCopy[8][14] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[2][13]){
+					gridCopy[2][13] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[2][14]){
+					gridCopy[2][14] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[5][15]){
+					gridCopy[5][15] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[7][16]){
+					gridCopy[7][16] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[3][16]){
+					gridCopy[3][16] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[4][17]){
+					gridCopy[4][17] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[5][17]){
+					gridCopy[5][17] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[6][17]){
+					gridCopy[6][17] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[5][18]){
+					gridCopy[5][18] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[4][21]){
+					gridCopy[4][21] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[3][21]){
+					gridCopy[3][21] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[2][21]){
+					gridCopy[2][21] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[4][22]){
+					gridCopy[4][22] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[3][22]){
+					gridCopy[3][22] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[2][22]){
+					gridCopy[2][22] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[5][23]){
+					gridCopy[5][23] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[1][23]){
+					gridCopy[1][23] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[1][25]){
+					gridCopy[1][25] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[0][25]){
+					gridCopy[0][25] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[5][25]){
+					gridCopy[5][25] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[6][25]){
+					gridCopy[6][25] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[2][35]){
+					gridCopy[2][35] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[3][35]){
+					gridCopy[3][35] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[2][36]){
+					gridCopy[2][36] = true;
+				}
+				else if(gridCopy[i][j] === gridCopy[3][36]){
+					gridCopy[3][36] = true;
+				}
+			}
+		}
+		this.setState({
+			gridFull: gridCopy
+		})
 	}
+
+	// componentDidMount() {
+	// 	this.seed();
+	// }
 
 	render() {
 		return (
@@ -142,6 +271,7 @@ class Main extends React.Component {
 						seed={this.seed}
 						gridSize={this.gridSize}
 						play={this.play}
+						glider={this.glider}
 					/>
 					<h2>Generations: {this.state.generation}</h2>
 					<Grid

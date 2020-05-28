@@ -32,7 +32,10 @@ export default function Buttons(props){
                     Fast
                 </button>
                 <button className="btn btn-danger" onClick={props.seed}>
-                    Seed
+                    Random
+                </button>
+                <button className="btn btn-danger" onClick={props.glider}>
+                    Glider Factory
                 </button>
 
                 <DropdownButton
