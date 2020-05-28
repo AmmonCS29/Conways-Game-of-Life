@@ -2,6 +2,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import Grid from './GridTwo.js';
 import Box from './Box.js';
 import Buttons from './Buttons.js';
+import Rules from './Rules.js'
 // import {useInterval} from './useInterval.js';
 
 class Main extends React.Component {
@@ -117,24 +118,30 @@ class Main extends React.Component {
 
 	render() {
 		return (
-			<div>
-				<h1>The Game of Life</h1>
-				<Buttons
-					playButton={this.playButton}
-					pauseButton={this.pauseButton}
-					slow={this.slow}
-					fast={this.fast}
-					clear={this.clear}
-					seed={this.seed}
-					gridSize={this.gridSize}
-				/>
-				<Grid
-					gridFull={this.state.gridFull}
-					rows={this.rows}
-					cols={this.cols}
-					selectBox={this.selectBox}
-				/>
-				<h2>Generations: {this.state.generation}</h2>
+			<div className="flex">
+				<div className="left">
+					<h1>The Game of Life</h1>
+					<Buttons
+						playButton={this.playButton}
+						pauseButton={this.pauseButton}
+						slow={this.slow}
+						fast={this.fast}
+						clear={this.clear}
+						seed={this.seed}
+						gridSize={this.gridSize}
+						play={this.play}
+					/>
+					<Grid
+						gridFull={this.state.gridFull}
+						rows={this.rows}
+						cols={this.cols}
+						selectBox={this.selectBox}
+					/>
+					<h2>Generations: {this.state.generation}</h2>
+				</div>
+				<div >
+					<Rules />
+				</div>
 			</div>
 		);
 	}

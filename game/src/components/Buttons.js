@@ -16,6 +16,9 @@ export default function Buttons(props){
                 <button className="btn btn-danger" onClick={props.playButton}>
                     Play
                 </button>
+                <button className="btn btn-danger" onClick={props.play}>
+                    Next Gen
+                </button>
                 <button className="btn btn-danger" onClick={props.pauseButton}>
                     Pause
                 </button>
@@ -31,6 +34,7 @@ export default function Buttons(props){
                 <button className="btn btn-danger" onClick={props.seed}>
                     Seed
                 </button>
+
                 <DropdownButton
                     title="Grid Size"
                     id="size-menu"
